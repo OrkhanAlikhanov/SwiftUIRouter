@@ -4,9 +4,9 @@
 An ⚠️experimental⚠️ navigation router for SwiftUI
 
 ## Usage
-Check out [ExampleApp](https://github.com/OrkhanAlikhanov/SwiftUIRouter/tree/master/ExampleApp) for more.
+### 💡 Check out [ExampleApp](https://github.com/OrkhanAlikhanov/SwiftUIRouter/tree/master/ExampleApp) for more.
 
-Define your routes
+1. Define your routes:
 ```swift
 import SwiftUIRouter
 
@@ -16,7 +16,7 @@ extension NavigationRouteLink {
   
   static func userDetails(for user: User) -> NavigationRouteLink {
     NavigationRouteLink(path: "/users/\(user.id)", meta: [
-      "user": user, /// used 
+      "user": user, /// can be used when resolving route link to a View. Check below how it's used.
     ])
   }
   
@@ -26,7 +26,7 @@ extension NavigationRouteLink {
 }
 ```
 
-Implement how they should be resolved:
+2. Implement how they should be resolved:
 ```swift
 extension Array where Element == NavigationRoute {
   static var all: [NavigationRoute] {
@@ -43,7 +43,7 @@ extension Array where Element == NavigationRoute {
 }
 ```
 
-Create root app:
+3. Create root app:
 ```swift
 struct ExampleApp: View {
   var body: some View {
