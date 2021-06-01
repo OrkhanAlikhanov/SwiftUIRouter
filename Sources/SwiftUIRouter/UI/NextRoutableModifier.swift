@@ -27,7 +27,6 @@ public struct NextRoutableModifier: ViewModifier {
   public func body(content: Content) -> some View {
     VStack(spacing: 0) {
       content
-      Text("next")
       NavigationLink(destination: nextView, isActive: $isActive) {
         EmptyView()
       }

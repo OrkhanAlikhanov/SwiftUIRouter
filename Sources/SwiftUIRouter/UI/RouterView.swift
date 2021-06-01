@@ -8,16 +8,28 @@
 import SwiftUI
 
 public struct RouterView: View {
-  @Environment(\.router) var router
-  public var link: NavigationRouteLink
+  public var router: NavigationRouter
   
-  public init(_ link: NavigationRouteLink) {
-    self.link = link
+  public init(router: NavigationRouter, root: NavigationRouteLink? = nil) {
+    self.router = router
+    
+    guard  let link = root else {
+      return
+    }
+    
+    guard let route = router.resolve(link: link) else {
+      print("[RouterView: Given root link not found: \(link.path)]")
+      return
+    }
+    
+    router.routeStack.append(route)
   }
   
   public var body: some View {
-    if let route = router.resolve(link: link) {
-      route.view
+    if let route = router.routeStack.first {
+      route
+        .view
+        .environment(\.router, router)
     } else {
       EmptyView()
     }
